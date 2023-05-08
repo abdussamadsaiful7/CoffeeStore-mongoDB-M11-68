@@ -1,7 +1,43 @@
 import React from 'react';
+import { HiEye, HiPencilSquare, HiTrash } from "react-icons/hi2";
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 const CoffeeCard = ({ coffee }) => {
-    const { name, quantity, supplier, taste, category, details, photo } = coffee
+    const { _id, name, quantity, supplier, taste, category, details, photo } = coffee;
+
+    const handleDelete = _id => {
+        console.log(_id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                fetch(`http://localhost:5000/coffee/${_id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your coffee has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+
+            }
+        })
+    }
+
     return (
         <div className="card card-side bg-base-100 shadow-xl py-4">
             <figure><img src={photo} alt="Movie" /></figure>
@@ -16,9 +52,11 @@ const CoffeeCard = ({ coffee }) => {
                 </div>
                 <div className="card-actions justify-end">
                     <div className="btn-group btn-group-vertical space-y-4">
-                        <button className="btn btn-sm">View</button>
-                        <button className="btn btn-sm">Edit</button>
-                        <button className="btn btn-sm">X</button>
+                        <button className="btn btn-sm bg-[#D2B48C]"><HiEye /></button>
+                        <Link to={`/updateCoffee/${_id}`}>
+                            <button className="btn btn-sm"><HiPencilSquare /></button>
+                        </Link>
+                        <button onClick={() => handleDelete(_id)} className="btn bg-[#EA4744] btn-sm"><HiTrash /></button>
                     </div>
                 </div>
             </div>
