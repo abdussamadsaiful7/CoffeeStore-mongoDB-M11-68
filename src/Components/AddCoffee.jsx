@@ -1,16 +1,50 @@
 import React from 'react';
+import Swal from 'sweetalert2'
 
 const AddCoffee = () => {
 
     const handleAddCoffee = event=>{
         event.preventDefault()
-        
+
+        const form = event.target;
+        const name = form.name.value;
+        const quantity = form.quantity.value;
+        const supplier = form.supplier.value;
+        const taste = form.taste.value;
+        const category = form.category.value;
+        const details = form.details.value;
+        const photo = form.photo.value;
+
+        const newCoffee = {name, quantity, supplier, taste, category, details, photo}
+        console.log(newCoffee);
+
+        //send  data to the server
+        fetch('http://localhost:5000/coffee',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newCoffee)
+        })
+        .then(res=> res.json())
+        .then(data=>{
+            console.log(data);
+            if(data.insertedId){
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'User added successfully!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                  })
+            }
+        })
+
     }
     return (
         <div className='bg-[#F4F3F0] p-24'>
             <h1 className='text-3xl font-extrabold text-center'>Add Coffee</h1>
 
-            <form>
+            <form onSubmit={handleAddCoffee}>
                 {/* form row */}
 
                 <div className='md:flex mb-5'>
@@ -61,7 +95,7 @@ const AddCoffee = () => {
                             <span className="label-text">Category</span>
                         </label>
                         <label className="input-group">
-                            <input type="text" name="Category" placeholder="Category" className="input input-bordered w-full" />
+                            <input type="text" name="category" placeholder="Category" className="input input-bordered w-full" />
                         </label>
                     </div>
                     <div className="form-control md: w-1/2  ml-8">
@@ -69,7 +103,7 @@ const AddCoffee = () => {
                             <span className="label-text">Details</span>
                         </label>
                         <label className="input-group">
-                            <input type="text" name="Details" placeholder="Details" className=" input input-bordered w-full" />
+                            <input type="text" name="details" placeholder="Details" className=" input input-bordered w-full" />
                         </label>
                     </div>
                 </div>
