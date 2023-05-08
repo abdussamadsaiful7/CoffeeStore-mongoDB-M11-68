@@ -1,18 +1,95 @@
 import React from 'react';
 
 const AddCoffee = () => {
+
+    const handleAddCoffee = event=>{
+        event.preventDefault()
+        
+    }
     return (
-        <div>
-            <h1>Add coffee</h1>
-            <div className="form-control">
-                <label className="label">
-                    <span className="label-text">Your Email</span>
-                </label>
-                <label className="input-group">
-                    <span>Email</span>
-                    <input type="text" placeholder="info@site.com" className="input input-bordered" />
-                </label>
-            </div>
+        <div className='bg-[#F4F3F0] p-24'>
+            <h1 className='text-3xl font-extrabold text-center'>Add Coffee</h1>
+
+            <form>
+                {/* form row */}
+
+                <div className='md:flex mb-5'>
+                    <div className="form-control md: w-1/2">
+                        <label className="label">
+                            <span className="label-text">Coffee Name</span>
+                        </label>
+                        <label className="input-group">
+                            <input type="text" name="name" placeholder="Coffee Name" className="input input-bordered w-full" />
+                        </label>
+                    </div>
+                    <div className="form-control md: w-1/2  ml-8">
+                        <label className="label">
+                            <span className="label-text">Available Quantity</span>
+                        </label>
+                        <label className="input-group">
+                            <input type="text" name="quantity" placeholder="Quantity" className=" input input-bordered w-full" />
+                        </label>
+                    </div>
+                </div>
+
+                {/* form supplier row */}
+
+                <div className='md:flex  mb-5'>
+                    <div className="form-control md: w-1/2">
+                        <label className="label">
+                            <span className="label-text">Supplier</span>
+                        </label>
+                        <label className="input-group">
+                            <input type="text" name="supplier" placeholder="supplier Name" className="input input-bordered w-full" />
+                        </label>
+                    </div>
+                    <div className="form-control md: w-1/2  ml-8">
+                        <label className="label">
+                            <span className="label-text">Taste</span>
+                        </label>
+                        <label className="input-group">
+                            <input type="text" name="taste" placeholder="taste" className=" input input-bordered w-full" />
+                        </label>
+                    </div>
+                </div>
+
+                {/* form Category row */}
+
+                <div className='md:flex  mb-5'>
+                    <div className="form-control md: w-1/2">
+                        <label className="label">
+                            <span className="label-text">Category</span>
+                        </label>
+                        <label className="input-group">
+                            <input type="text" name="Category" placeholder="Category" className="input input-bordered w-full" />
+                        </label>
+                    </div>
+                    <div className="form-control md: w-1/2  ml-8">
+                        <label className="label">
+                            <span className="label-text">Details</span>
+                        </label>
+                        <label className="input-group">
+                            <input type="text" name="Details" placeholder="Details" className=" input input-bordered w-full" />
+                        </label>
+                    </div>
+                </div>
+
+                {/* form photo url row */}
+
+
+                <div className="form-control w-full  mb-5">
+                    <label className="label">
+                        <span className="label-text">Photo</span>
+                    </label>
+                    <label className="input-group">
+                        <input type="text" name="photo" placeholder="Enter photo URL" className="input input-bordered w-full" />
+                    </label>
+                </div>
+                <div className='text-center'>
+                    <input type="submit" value="Add coffee" className="btn btn-wide" />
+                </div>
+            </form>
+
         </div>
     );
 };
